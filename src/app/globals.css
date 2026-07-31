@@ -1,0 +1,515 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Design tokens
+   Base palette stays light/white. The existing slate + blue-600 family
+   (text-slate-900, text-slate-600, border-slate-200, bg-white, text-blue-600,
+   etc.) is untouched: it is Tailwind's built-in palette and hundreds of pages
+   already depend on it. Everything below only adds new tokens and utilities
+   on top of that foundation.
+   ========================================================================== */
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+@theme {
+  /* Neutral surfaces, one step above pure white. Used for section
+     backgrounds and subtly-differentiated panels without introducing a
+     second gray scale. */
+  --color-surface: oklch(98.4% 0.003 247.858);
+  --color-surface-hover: oklch(96.8% 0.007 247.896);
+
+  /* Semantic finance colors: gains, losses, caution. Kept restrained
+     (no neon/rainbow) and paired with a subtle background tint for
+     badges, deltas and callouts. */
+  --color-positive: oklch(62.5% 0.15 152);
+  --color-positive-subtle: oklch(96.5% 0.03 155);
+  --color-negative: oklch(58% 0.21 25);
+  --color-negative-subtle: oklch(96.5% 0.03 20);
+  --color-warning: oklch(66% 0.16 60);
+  --color-warning-subtle: oklch(96.5% 0.05 80);
+
+  /* Soft, layered elevation tuned for a light fintech surface. Softer and
+     less "webby" than Tailwind's default shadow scale. */
+  --shadow-elevation-1: 0 1px 2px 0 rgb(15 23 42 / 0.04), 0 1px 3px 0 rgb(15 23 42 / 0.06);
+  --shadow-elevation-2: 0 4px 10px -2px rgb(15 23 42 / 0.08), 0 2px 4px -2px rgb(15 23 42 / 0.05);
+  --shadow-elevation-3: 0 16px 32px -12px rgb(15 23 42 / 0.18), 0 4px 10px -4px rgb(15 23 42 / 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: oklch(90% 0.06 258);
+  color: oklch(24% 0.06 258);
+}
+
+.result-value {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   Base layer: typographic and accessibility defaults.
+   Placed in @layer base so it always loses to Tailwind utility classes
+   (utilities layer > base layer regardless of specificity). Every heading,
+   link, list, etc. across the 450+ existing tool pages already carries
+   explicit utility classes, so these rules only ever act as a fallback for
+   elements that don't, and never override existing page styling.
+   ========================================================================== */
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.015em;
+  }
+
+  h5,
+  h6 {
+    letter-spacing: -0.01em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-blue-500);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+
+  /* ---- .prose-article -----------------------------------------------
+     Refined defaults for the long-form SEO article body on tool pages.
+     Readable measure, calm vertical rhythm, and clear link treatment. */
+
+  .prose-article {
+    max-width: 70ch;
+    color: var(--color-slate-600);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .prose-article > :first-child {
+    margin-top: 0;
+  }
+
+  .prose-article h2 {
+    margin-top: 2.25em;
+    margin-bottom: 0.75em;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+    color: var(--color-slate-900);
+  }
+
+  .prose-article h3 {
+    margin-top: 1.75em;
+    margin-bottom: 0.6em;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+    color: var(--color-slate-900);
+  }
+
+  .prose-article p {
+    margin-top: 1.1em;
+    margin-bottom: 1.1em;
+  }
+
+  .prose-article ul,
+  .prose-article ol {
+    margin-top: 1.1em;
+    margin-bottom: 1.1em;
+    padding-left: 1.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+  }
+
+  .prose-article ul {
+    list-style-type: disc;
+  }
+
+  .prose-article ol {
+    list-style-type: decimal;
+  }
+
+  .prose-article li::marker {
+    color: var(--color-slate-400);
+  }
+
+  .prose-article li > ul,
+  .prose-article li > ol {
+    margin-top: 0.5em;
+    margin-bottom: 0;
+  }
+
+  .prose-article strong {
+    font-weight: 600;
+    color: var(--color-slate-900);
+  }
+
+  .prose-article blockquote {
+    margin: 1.5em 0;
+    padding: 0.25em 0 0.25em 1.25em;
+    border-left: 3px solid var(--color-slate-200);
+    color: var(--color-slate-600);
+    font-style: italic;
+  }
+
+  .prose-article code {
+    font-size: 0.875em;
+    background: var(--color-surface-hover);
+    padding: 0.15em 0.4em;
+    border-radius: 0.3em;
+    color: var(--color-slate-800);
+  }
+
+  .prose-article hr {
+    margin: 2.5em 0;
+    border: none;
+    border-top: 1px solid var(--color-slate-200);
+  }
+
+  .prose-article a {
+    color: var(--color-blue-600);
+    text-decoration: none;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1.5px;
+  }
+
+  .prose-article a:hover {
+    text-decoration: underline;
+  }
+
+  /* External links (absolute http(s) URLs) get a small visual cue so
+     readers know they'll leave the article context. */
+  .prose-article a[href^="http"] {
+    text-decoration-color: var(--color-blue-300);
+  }
+
+  .prose-article a[href^="http"]::after {
+    content: "\2197";
+    display: inline-block;
+    margin-left: 0.2em;
+    font-size: 0.85em;
+    text-decoration: none;
+    color: var(--color-blue-400);
+    transform: translateY(-0.05em);
+  }
+}
+
+/* ==========================================================================
+   Surface / elevation utilities
+   New, additive utility classes (no existing usage anywhere in the
+   codebase) for consistent card and panel treatment across teams.
+   ========================================================================== */
+
+@utility surface {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-slate-200);
+  border-radius: var(--radius-xl);
+}
+
+@utility surface-sunken {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-slate-200);
+  border-radius: var(--radius-xl);
+}
+
+@utility elevation-1 {
+  box-shadow: var(--shadow-elevation-1);
+}
+
+@utility elevation-2 {
+  box-shadow: var(--shadow-elevation-2);
+}
+
+@utility elevation-3 {
+  box-shadow: var(--shadow-elevation-3);
+}
+
+/* ==========================================================================
+   Type scale utilities
+   Additive, semantic text styles for consistent hierarchy on marketing
+   and landing sections. Existing pages keep using raw text-* utilities;
+   these are opt-in.
+   ========================================================================== */
+
+@utility text-display {
+  font-size: 2.75rem;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+@utility text-h1 {
+  font-size: 2.25rem;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+@utility text-h2 {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+@utility text-h3 {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+@utility text-lead {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+@utility text-caption {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* ==========================================================================
+   Editorial surface language (Quant Calculators)
+   Hairline rules, dot fields, and blueprint grids that give marketing and
+   landing sections a drafting-table feel without introducing gradients,
+   dark panels, or a second color family. Everything here is additive and
+   opt-in: no existing tool page changes appearance.
+   ========================================================================== */
+
+@theme {
+  /* Hairline used for structural rules and frame edges. Slightly lighter
+     than slate-200 so long rules read as drafting guides, not borders. */
+  --color-hairline: oklch(92.9% 0.008 247.9);
+  --color-hairline-strong: oklch(87% 0.011 247.9);
+}
+
+/* Square dot field, the backdrop behind the hero spotlight panel and the
+   closing call to action. Size and origin are set via --dot-size so a
+   section can dial the density up or down. */
+@utility dot-field {
+  --dot-size: 22px;
+  background-image: radial-gradient(circle at 1px 1px, var(--color-slate-200) 1px, transparent 0);
+  background-size: var(--dot-size) var(--dot-size);
+  background-position: 0 0;
+}
+
+/* Blueprint grid: two hairline rule families crossing at 40px. Used behind
+   framed UI panels so they read as drawn on graph paper. */
+@utility blueprint-grid {
+  --grid-size: 40px;
+  background-image:
+    linear-gradient(to right, var(--color-hairline) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-hairline) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+}
+
+/* Fade a decorative background out toward the edges so patterns never
+   collide with body copy. Pair with dot-field or blueprint-grid. */
+@utility pattern-fade {
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 78%);
+}
+
+@utility pattern-fade-b {
+  mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+}
+
+/* Uppercase micro-label used above every section heading. Paired with the
+   <Eyebrow> component, which supplies the leading marker. */
+@utility eyebrow {
+  font-size: 0.6875rem;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-slate-400);
+}
+
+/* Small caps numeric label for figures, counters, and table headers. */
+@utility label-mono {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 0.6875rem;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* A framed panel: hairline edge, flat white, no shadow. The base surface
+   for every UI mock and demo on the landing page. */
+@utility panel {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-hairline-strong);
+  border-radius: var(--radius-xl);
+}
+
+/* ==========================================================================
+   Transitions.dev, card resize
+   Put `.t-resize` on any element whose width or height changes (directly or
+   via a state class) and the two sizes tween instead of snapping.
+   ========================================================================== */
+
+:root {
+  --resize-dur: 300ms;
+  --resize-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Lets `height: auto` participate in transitions, which is what makes the
+     effect real on content-sized panels (the spotlight result list, the FAQ
+     accordion) rather than a no-op. Ignored by engines that lack it, where
+     the size simply snaps as it did before. */
+  interpolate-size: allow-keywords;
+}
+
+.t-resize {
+  transition:
+    width var(--resize-dur) var(--resize-ease),
+    height var(--resize-dur) var(--resize-ease);
+  will-change: width, height;
+}
+
+/* Accordion companion: the same curve applied to a <details> panel opening
+   and closing, so the FAQ expands with the cards rather than jumping. */
+.t-resize-details::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition:
+    block-size var(--resize-dur) var(--resize-ease),
+    content-visibility var(--resize-dur) var(--resize-ease) allow-discrete;
+}
+
+.t-resize-details[open]::details-content {
+  block-size: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-resize,
+  .t-resize-details::details-content {
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   Motion: marquees and tickers
+   All of it is compositor-only (transform), never JS scroll handlers and
+   never animated width/height/top/left, so nothing here costs layout,
+   contributes to CLS, or blocks the main thread. The content inside is
+   server rendered, so crawlers read real links whether or not the animation
+   ever runs.
+   ========================================================================== */
+
+@keyframes it-marquee-x {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes it-marquee-y {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: it-marquee-x var(--marquee-dur, 40s) linear infinite;
+}
+
+.marquee-track[data-direction="reverse"] {
+  animation-direction: reverse;
+}
+
+.marquee-col {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+  animation: it-marquee-y var(--marquee-dur, 30s) linear infinite;
+}
+
+/* Hovering a marquee holds it still so a visitor can actually read and
+   click the row they were reaching for. */
+.marquee-viewport:hover .marquee-track,
+.marquee-viewport:hover .marquee-col,
+.marquee-viewport:focus-within .marquee-track,
+.marquee-viewport:focus-within .marquee-col {
+  animation-play-state: paused;
+}
+
+/* Edge masks so rows dissolve rather than being chopped by the container. */
+.marquee-viewport {
+  mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+}
+
+.marquee-viewport-y {
+  mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .marquee-col {
+    animation: none;
+  }
+}
+
+/* Caret used by the spotlight search placeholder typewriter. */
+@keyframes it-caret {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  55%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.it-caret {
+  display: inline-block;
+  width: 1px;
+  height: 1.05em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  background-color: var(--color-blue-600);
+  animation: it-caret 1.05s steps(1, end) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .it-caret {
+    animation: none;
+    opacity: 1;
+  }
+}
