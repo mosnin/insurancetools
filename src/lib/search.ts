@@ -189,3 +189,60 @@ export function getAllCategories(limit?: number): CategoryResult[] {
   const results = CATEGORY_INDEX.map((entry) => entry.result);
   return typeof limit === "number" ? results.slice(0, limit) : results;
 }
+
+/* --------------------------------------------------------------------- */
+/* Unified search: tools and categories together.                        */
+/* --------------------------------------------------------------------- */
+
+export interface SearchResult {
+  name: string;
+  description: string;
+  href: string;
+  slug: string;
+  /** Category label shown as the result's meta tag. */
+  meta: string;
+  kind: "tool" | "category";
+}
+
+function toolToResult(tool: Tool): SearchResult {
+  return {
+    name: tool.name,
+    description: tool.description,
+    href: `/tools/${tool.categorySlug}/${tool.slug}`,
+    slug: tool.slug,
+    meta: tool.category,
+    kind: "tool",
+  };
+}
+
+function categoryToResult(category: CategoryResult): SearchResult {
+  return {
+    name: category.name,
+    description: category.description,
+    href: category.href,
+    slug: category.slug,
+    meta: "Category",
+    kind: "category",
+  };
+}
+
+/**
+ * Search tools and categories together, tools ranked first since a direct
+ * tool match is more specific and more useful than its parent category.
+ * Falls back to category-only results while the tool registry is thin, so
+ * every query still returns something browsable.
+ */
+export function searchAll(query: string, opts: { limit?: number } = {}): SearchResult[] {
+  const tools = searchTools(query).map(toolToResult);
+  const categories = searchCategories(query).map(categoryToResult);
+  const results = [...tools, ...categories];
+  return typeof opts.limit === "number" ? results.slice(0, opts.limit) : results;
+}
+
+/** Empty-state suggestions: any live tools first, then every category. */
+export function getStartingResults(limit?: number): SearchResult[] {
+  const tools = getPopularTools().map(toolToResult);
+  const categories = getAllCategories().map(categoryToResult);
+  const results = [...tools, ...categories];
+  return typeof limit === "number" ? results.slice(0, limit) : results;
+}

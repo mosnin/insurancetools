@@ -1,17 +1,13 @@
 "use client";
 
 /**
- * The hero centrepiece: a working spotlight over the site's category
- * taxonomy.
+ * The hero centrepiece: a working spotlight over the whole catalog.
  *
  * This is deliberately not a screenshot. It is the real search index, so a
- * first-time visitor can type a question and land on the category that
- * answers it without ever scrolling. Empty state shows every category, the
- * placeholder cycles through real queries, and arrow keys plus Enter behave
- * the way they do in the Ctrl+K palette. Once individual calculators ship
- * into TOOLS, this graduates to tool-level results the same way the
- * reference build's spotlight worked; category results are the real,
- * non-empty content today.
+ * first-time visitor can type a question and land on the tool or category
+ * that answers it without ever scrolling. Live tools rank above their
+ * parent category, the placeholder cycles through real queries, and arrow
+ * keys plus Enter behave the way they do in the Ctrl+K palette.
  */
 
 import { useEffect, useId, useMemo, useRef, useState, useTransition, type KeyboardEvent } from "react";
@@ -20,8 +16,8 @@ import Link from "next/link";
 import { useReducedMotion } from "motion/react";
 import { CornerDownLeft, Search } from "lucide-react";
 import { BeamFrame, ProcessingOrb } from "@/components/brand";
-import { searchCategories, getAllCategories, type CategoryResult } from "@/lib/search";
-import { TOTAL_CATEGORY_COUNT } from "./data";
+import { searchAll, getStartingResults, type SearchResult } from "@/lib/search";
+import { TOTAL_CATEGORY_COUNT, TOTAL_TOOL_COUNT } from "./data";
 
 /** Queries the placeholder types out, chosen to mirror real search demand. */
 const SAMPLE_QUERIES = [
@@ -95,11 +91,11 @@ export function SpotlightSearch() {
   const animatePlaceholder = !shouldReduceMotion && !focused && trimmed.length === 0;
   const typed = useTypedPlaceholder(animatePlaceholder);
 
-  const starting = useMemo(() => getAllCategories(RESULT_LIMIT), []);
+  const starting = useMemo(() => getStartingResults(RESULT_LIMIT), []);
 
-  const results: CategoryResult[] = useMemo(() => {
+  const results: SearchResult[] = useMemo(() => {
     if (!trimmed) return starting;
-    return searchCategories(query, { limit: RESULT_LIMIT });
+    return searchAll(query, { limit: RESULT_LIMIT });
   }, [query, trimmed, starting]);
 
   // Reset the highlighted row whenever the query changes. Adjusted during
@@ -111,9 +107,9 @@ export function SpotlightSearch() {
     setActiveIndex(0);
   }
 
-  function open(category: CategoryResult) {
+  function open(result: SearchResult) {
     startNavigation(() => {
-      router.push(category.href);
+      router.push(result.href);
     });
   }
 
@@ -165,13 +161,15 @@ export function SpotlightSearch() {
                 aria-activedescendant={
                   results[activeIndex] ? `${listboxId}-opt-${activeIndex}` : undefined
                 }
-                aria-label="Search every insurance calculator category"
+                aria-label="Search every insurance calculator and category"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onFocus={() => setFocused(true)}
                 onBlur={() => setFocused(false)}
                 onKeyDown={handleKeyDown}
-                placeholder={animatePlaceholder ? "" : `Search ${TOTAL_CATEGORY_COUNT} insurance categories`}
+                placeholder={
+                  animatePlaceholder ? "" : `Search insurance calculators and ${TOTAL_CATEGORY_COUNT} categories`
+                }
                 className="w-full bg-transparent text-[15px] text-slate-900 placeholder:text-slate-400 focus:outline-none sm:text-base"
               />
               {animatePlaceholder && (
@@ -189,7 +187,7 @@ export function SpotlightSearch() {
                 state="shaping"
                 size={20}
                 speed={1.65}
-                label="Opening category"
+                label="Opening result"
                 hideLabel
                 className="shrink-0"
               />
@@ -223,16 +221,16 @@ export function SpotlightSearch() {
                 .
               </div>
             ) : (
-              <ul id={listboxId} role="listbox" aria-label="Category results">
-                {results.map((category, i) => (
+              <ul id={listboxId} role="listbox" aria-label="Search results">
+                {results.map((result, i) => (
                   <li
-                    key={category.slug}
+                    key={result.href}
                     id={`${listboxId}-opt-${i}`}
                     role="option"
                     aria-selected={i === activeIndex}
                   >
                     <Link
-                      href={category.href}
+                      href={result.href}
                       onMouseEnter={() => setActiveIndex(i)}
                       className={`flex items-center justify-between gap-4 rounded-lg px-3 py-2.5 transition-colors ${
                         i === activeIndex ? "bg-blue-50" : "hover:bg-slate-50"
@@ -245,11 +243,11 @@ export function SpotlightSearch() {
                             i === activeIndex ? "bg-blue-600" : "bg-slate-300"
                           }`}
                         />
-                        <span className="truncate text-sm font-medium text-slate-900">{category.name}</span>
+                        <span className="truncate text-sm font-medium text-slate-900">{result.name}</span>
                       </span>
                       <span className="flex shrink-0 items-center gap-2.5">
                         <span className="label-mono hidden text-slate-400 sm:inline">
-                          {category.slug.toUpperCase()}
+                          {result.meta.toUpperCase()}
                         </span>
                         {i === activeIndex && (
                           <CornerDownLeft className="h-3.5 w-3.5 text-blue-600" aria-hidden="true" />
@@ -264,7 +262,10 @@ export function SpotlightSearch() {
 
           {/* Status bar */}
           <div className="flex items-center justify-between gap-3 border-t border-hairline bg-slate-50/60 px-4 py-2.5 sm:px-5">
-            <span className="label-mono text-slate-400">{TOTAL_CATEGORY_COUNT} CATEGORIES INDEXED</span>
+            <span className="label-mono text-slate-400">
+              {TOTAL_TOOL_COUNT} {TOTAL_TOOL_COUNT === 1 ? "TOOL" : "TOOLS"}, {TOTAL_CATEGORY_COUNT} CATEGORIES
+              INDEXED
+            </span>
             <Link
               href={trimmed ? `/search?q=${encodeURIComponent(trimmed)}` : "/explore"}
               className="label-mono text-blue-600 transition-colors hover:text-blue-700"

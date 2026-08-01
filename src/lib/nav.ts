@@ -64,9 +64,26 @@ export const NAV_ITEMS: NavItem[] = [
     categorySlugs: ["auto"],
     icon: Car,
     categories: [
-      { name: "Auto Insurance", categorySlug: "auto", href: "/tools/auto", tools: [] },
+      {
+        name: "Auto Insurance",
+        categorySlug: "auto",
+        href: "/tools/auto",
+        tools: [
+          {
+            name: "Car Insurance Coverage Calculator",
+            href: "/tools/auto/car-insurance-coverage-calculator",
+            slug: "car-insurance-coverage-calculator",
+          },
+        ],
+      },
     ],
-    featured: [],
+    featured: [
+      {
+        name: "Car Insurance Coverage Calculator",
+        href: "/tools/auto/car-insurance-coverage-calculator",
+        slug: "car-insurance-coverage-calculator",
+      },
+    ],
   },
   {
     label: "Home",

@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Search, ArrowRight, CornerDownLeft, X } from "lucide-react";
 import { BeamFrame } from "@/components/brand";
-import { searchCategories, getAllCategories, type CategoryResult } from "@/lib/search";
+import { searchAll, getStartingResults, type SearchResult } from "@/lib/search";
 
 export interface SearchDialogProps {
   /**
@@ -62,9 +62,9 @@ export function SearchDialog({ children, className = "", open: controlledOpen, o
   const activeItemRef = useRef<HTMLLIElement>(null);
 
   const trimmed = query.trim();
-  const results: CategoryResult[] = useMemo(() => {
-    if (!trimmed) return getAllCategories(8);
-    return searchCategories(query, { limit: 8 });
+  const results: SearchResult[] = useMemo(() => {
+    if (!trimmed) return getStartingResults(8);
+    return searchAll(query, { limit: 8 });
   }, [query, trimmed]);
 
   const setOpen = useCallback(
@@ -123,9 +123,9 @@ export function SearchDialog({ children, className = "", open: controlledOpen, o
     activeItemRef.current?.scrollIntoView({ block: "nearest" });
   }, [activeIndex]);
 
-  function goToCategory(category: CategoryResult) {
+  function goToResult(result: SearchResult) {
     close();
-    router.push(category.href);
+    router.push(result.href);
   }
 
   function goToSearch() {
@@ -153,7 +153,7 @@ export function SearchDialog({ children, className = "", open: controlledOpen, o
     if (e.key === "Enter") {
       e.preventDefault();
       if (results[activeIndex]) {
-        goToCategory(results[activeIndex]);
+        goToResult(results[activeIndex]);
       } else {
         goToSearch();
       }
@@ -196,7 +196,7 @@ export function SearchDialog({ children, className = "", open: controlledOpen, o
             className={`inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-500 shadow-sm transition-colors hover:border-slate-300 hover:text-slate-700 ${className}`}
           >
             <Search className="w-4 h-4 shrink-0" aria-hidden="true" />
-            <span className="hidden sm:inline">Search categories...</span>
+            <span className="hidden sm:inline">Search...</span>
             <kbd className="ml-1 hidden sm:inline-flex items-center gap-0.5 rounded border border-slate-200 bg-slate-50 px-1.5 py-0.5 text-[10px] font-medium text-slate-400">
               <span aria-hidden="true">Ctrl</span>K
             </kbd>
@@ -244,8 +244,8 @@ export function SearchDialog({ children, className = "", open: controlledOpen, o
                       aria-activedescendant={results[activeIndex] ? `${listboxId}-opt-${activeIndex}` : undefined}
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
-                      placeholder="Search insurance categories..."
-                      aria-label="Search insurance categories"
+                      placeholder="Search insurance calculators..."
+                      aria-label="Search insurance calculators"
                       className="w-full bg-transparent text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
                     />
                     <button
@@ -261,12 +261,12 @@ export function SearchDialog({ children, className = "", open: controlledOpen, o
                   <div className="max-h-96 overflow-y-auto py-2">
                     {!trimmed && (
                       <p className="px-4 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-wide text-slate-400">
-                        Categories
+                        Browse
                       </p>
                     )}
                     {results.length === 0 ? (
                       <div className="px-4 py-8 text-center text-sm text-slate-500">
-                        No categories match &ldquo;{trimmed}&rdquo;.
+                        Nothing matches &ldquo;{trimmed}&rdquo;.
                         <div className="mt-3">
                           <button
                             type="button"
@@ -279,9 +279,9 @@ export function SearchDialog({ children, className = "", open: controlledOpen, o
                       </div>
                     ) : (
                       <ul id={listboxId} role="listbox" aria-label="Search results">
-                        {results.map((category, i) => (
+                        {results.map((result, i) => (
                           <li
-                            key={category.slug}
+                            key={result.href}
                             id={`${listboxId}-opt-${i}`}
                             role="option"
                             aria-selected={i === activeIndex}
@@ -290,14 +290,14 @@ export function SearchDialog({ children, className = "", open: controlledOpen, o
                             <button
                               type="button"
                               onMouseEnter={() => setActiveIndex(i)}
-                              onClick={() => goToCategory(category)}
+                              onClick={() => goToResult(result)}
                               className={`flex w-full items-center justify-between gap-3 px-4 py-2.5 text-left text-sm transition-colors ${
                                 i === activeIndex ? "bg-blue-50 text-blue-700" : "text-slate-700 hover:bg-slate-50"
                               }`}
                             >
-                              <span className="truncate">{category.name}</span>
+                              <span className="truncate">{result.name}</span>
                               <span className="flex shrink-0 items-center gap-2 text-xs text-slate-400">
-                                {category.slug}
+                                {result.meta}
                                 {i === activeIndex && <CornerDownLeft className="w-3 h-3" aria-hidden="true" />}
                               </span>
                             </button>

@@ -17,11 +17,15 @@ export interface HomeCategoryMeta {
   featuredSlugs: string[];
 }
 
+const FEATURED_SLUGS_BY_CATEGORY: Partial<Record<CategorySlug, string[]>> = {
+  auto: ["car-insurance-coverage-calculator"],
+};
+
 export const CATEGORY_META: HomeCategoryMeta[] = CATEGORY_ORDER.map((slug) => ({
   slug,
   name: CATEGORY_CONTENT[slug].displayName,
   description: CATEGORY_CONTENT[slug].intro,
-  featuredSlugs: [],
+  featuredSlugs: FEATURED_SLUGS_BY_CATEGORY[slug] ?? [],
 }));
 
 export function getCategoryFeaturedTools(meta: HomeCategoryMeta): Tool[] {

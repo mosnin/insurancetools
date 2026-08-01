@@ -70,7 +70,7 @@ export default function ExplorePage() {
             {TOTAL_CATEGORY_COUNT} categories, or search to jump straight to the one you need.
           </p>
           <div className="max-w-xl mx-auto">
-            <SearchBox size="lg" placeholder="Search insurance categories..." />
+            <SearchBox size="lg" />
           </div>
         </Reveal>
       </section>

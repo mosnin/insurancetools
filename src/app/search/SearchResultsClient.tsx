@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Search, X, ArrowUpRight } from "lucide-react";
-import { searchCategories, getAllCategories, type CategoryResult } from "@/lib/search";
+import { searchAll, getStartingResults, type SearchResult } from "@/lib/search";
 
 interface SearchResultsClientProps {
   initialQuery: string;
@@ -41,11 +41,9 @@ function highlightMatch(text: string, terms: string[]): ReactNode {
 /**
  * Live search results view for /search. Seeded with the ?q= value from the
  * server so its first render (including SSR) already contains every
- * matching category for crawlability. After hydration it re-filters
- * instantly as the user types and keeps the URL's ?q= in sync (debounced)
- * so results stay shareable and bookmarkable. Searches the category
- * taxonomy today; once individual calculators ship into TOOLS this can
- * search both.
+ * matching tool and category for crawlability. After hydration it
+ * re-filters instantly as the user types and keeps the URL's ?q= in sync
+ * (debounced) so results stay shareable and bookmarkable.
  */
 export function SearchResultsClient({ initialQuery }: SearchResultsClientProps) {
   const router = useRouter();
@@ -55,8 +53,8 @@ export function SearchResultsClient({ initialQuery }: SearchResultsClientProps) 
   const trimmed = query.trim();
   const terms = useMemo(() => trimmed.split(/\s+/).filter(Boolean), [trimmed]);
 
-  const results = useMemo(() => (trimmed ? searchCategories(query) : []), [query, trimmed]);
-  const allCategories = useMemo(() => getAllCategories(), []);
+  const results = useMemo(() => (trimmed ? searchAll(query) : []), [query, trimmed]);
+  const starting = useMemo(() => getStartingResults(), []);
 
   // Keep the URL's ?q= in sync with the live query, debounced, without
   // spamming history entries.
@@ -83,8 +81,8 @@ export function SearchResultsClient({ initialQuery }: SearchResultsClientProps) 
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search insurance categories..."
-          aria-label="Search insurance categories"
+          placeholder="Search insurance calculators..."
+          aria-label="Search insurance calculators"
           autoFocus
           className="w-full h-14 rounded-xl border border-slate-200 bg-white pl-12 pr-11 text-base text-slate-900 placeholder:text-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
@@ -106,9 +104,9 @@ export function SearchResultsClient({ initialQuery }: SearchResultsClientProps) 
           : "Enter a search term"}
       </div>
 
-      {!trimmed && <EmptyState categories={allCategories} />}
+      {!trimmed && <EmptyState results={starting} />}
 
-      {trimmed && results.length === 0 && <NoResultsState query={trimmed} categories={allCategories} />}
+      {trimmed && results.length === 0 && <NoResultsState query={trimmed} results={starting} />}
 
       {trimmed && results.length > 0 && (
         <div>
@@ -117,18 +115,18 @@ export function SearchResultsClient({ initialQuery }: SearchResultsClientProps) 
           </p>
 
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {results.map((category) => (
-              <li key={category.slug}>
+            {results.map((result) => (
+              <li key={result.href}>
                 <Link
-                  href={category.href}
+                  href={result.href}
                   className="flex items-start justify-between gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3.5 hover:border-blue-300 hover:shadow-sm transition-all group"
                 >
                   <span>
                     <span className="block text-sm font-medium text-slate-900 group-hover:text-blue-600 transition-colors">
-                      {highlightMatch(category.name, terms)}
+                      {highlightMatch(result.name, terms)}
                     </span>
                     <span className="block text-xs text-slate-500 mt-1 leading-relaxed line-clamp-2">
-                      {highlightMatch(category.description, terms)}
+                      {highlightMatch(result.description, terms)}
                     </span>
                   </span>
                   <ArrowUpRight
@@ -145,22 +143,23 @@ export function SearchResultsClient({ initialQuery }: SearchResultsClientProps) 
   );
 }
 
-function EmptyState({ categories }: { categories: CategoryResult[] }) {
+function EmptyState({ results }: { results: SearchResult[] }) {
   return (
     <div className="py-6">
       <p className="text-slate-600 mb-6">
-        Start typing to search every insurance category by name, keyword, or the decision it answers.
+        Start typing to search every insurance calculator and category by name, keyword, or the decision
+        it answers.
       </p>
-      <p className="text-sm font-semibold text-slate-400 uppercase tracking-wide mb-3">Every category</p>
+      <p className="text-sm font-semibold text-slate-400 uppercase tracking-wide mb-3">Browse</p>
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        {categories.map((category) => (
-          <li key={category.slug}>
+        {results.map((result) => (
+          <li key={result.href}>
             <Link
-              href={category.href}
+              href={result.href}
               className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3.5 hover:border-blue-300 hover:shadow-sm transition-all group"
             >
               <span className="text-sm font-medium text-slate-900 group-hover:text-blue-600 transition-colors">
-                {category.name}
+                {result.name}
               </span>
               <ArrowUpRight
                 className="w-4 h-4 text-slate-300 group-hover:text-blue-500 transition-colors shrink-0"
@@ -181,11 +180,11 @@ function EmptyState({ categories }: { categories: CategoryResult[] }) {
   );
 }
 
-function NoResultsState({ query, categories }: { query: string; categories: CategoryResult[] }) {
+function NoResultsState({ query, results }: { query: string; results: SearchResult[] }) {
   return (
     <div className="py-6">
       <p className="text-slate-700 mb-2">
-        No categories match &ldquo;{query}&rdquo;.
+        Nothing matches &ldquo;{query}&rdquo;.
       </p>
       <p className="text-slate-500 mb-6">
         Try a shorter or more general term, check your spelling, or browse the{" "}
@@ -210,14 +209,14 @@ function NoResultsState({ query, categories }: { query: string; categories: Cate
         You might be looking for
       </p>
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        {categories.slice(0, 6).map((category) => (
-          <li key={category.slug}>
+        {results.slice(0, 6).map((result) => (
+          <li key={result.href}>
             <Link
-              href={category.href}
+              href={result.href}
               className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3.5 hover:border-blue-300 hover:shadow-sm transition-all group"
             >
               <span className="text-sm font-medium text-slate-900 group-hover:text-blue-600 transition-colors">
-                {category.name}
+                {result.name}
               </span>
               <ArrowUpRight
                 className="w-4 h-4 text-slate-300 group-hover:text-blue-500 transition-colors shrink-0"

@@ -3,7 +3,7 @@
 import { useEffect, useId, useMemo, useRef, useState, type FormEvent, type KeyboardEvent } from "react";
 import { useRouter } from "next/navigation";
 import { Search, ArrowRight } from "lucide-react";
-import { searchCategories, type CategoryResult } from "@/lib/search";
+import { searchAll, type SearchResult } from "@/lib/search";
 
 export interface SearchBoxProps {
   /** Initial value of the input, e.g. the current ?q= on the search page. */
@@ -29,7 +29,7 @@ const SIZE_CLASSES: Record<NonNullable<SearchBoxProps["size"]>, string> = {
  */
 export function SearchBox({
   defaultValue = "",
-  placeholder = "Search insurance categories...",
+  placeholder = "Search insurance calculators...",
   className = "",
   size = "md",
   suggestions = true,
@@ -42,9 +42,9 @@ export function SearchBox({
   const [activeIndex, setActiveIndex] = useState(-1);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const results: CategoryResult[] = useMemo(() => {
+  const results: SearchResult[] = useMemo(() => {
     if (!suggestions) return [];
-    return searchCategories(value, { limit: 6 });
+    return searchAll(value, { limit: 6 });
   }, [value, suggestions]);
 
   // Clear the highlighted suggestion when the value changes. Adjusted during
@@ -72,15 +72,15 @@ export function SearchBox({
     router.push(`/search?q=${encodeURIComponent(trimmed)}`);
   }
 
-  function goToCategory(category: CategoryResult) {
+  function goToResult(result: SearchResult) {
     setOpen(false);
-    router.push(category.href);
+    router.push(result.href);
   }
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (activeIndex >= 0 && results[activeIndex]) {
-      goToCategory(results[activeIndex]);
+      goToResult(results[activeIndex]);
       return;
     }
     goToSearch(value);
@@ -127,7 +127,7 @@ export function SearchBox({
             onKeyDown={handleKeyDown}
             placeholder={placeholder}
             autoFocus={autoFocus}
-            aria-label="Search insurance categories"
+            aria-label="Search insurance calculators"
             className={`w-full rounded-xl border border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${SIZE_CLASSES[size]}`}
           />
           <button
@@ -149,28 +149,28 @@ export function SearchBox({
         >
           {results.length === 0 ? (
             <li className="px-4 py-3 text-sm text-slate-500">
-              No categories match &ldquo;{value.trim()}&rdquo;.{" "}
+              Nothing matches &ldquo;{value.trim()}&rdquo;.{" "}
               <button
                 type="button"
                 onClick={() => goToSearch(value)}
                 className="text-blue-600 hover:underline"
               >
-                Search all categories
+                Search anyway
               </button>
             </li>
           ) : (
-            results.map((category, i) => (
-              <li key={category.slug} id={`${listboxId}-opt-${i}`} role="option" aria-selected={i === activeIndex}>
+            results.map((result, i) => (
+              <li key={result.href} id={`${listboxId}-opt-${i}`} role="option" aria-selected={i === activeIndex}>
                 <button
                   type="button"
                   onMouseEnter={() => setActiveIndex(i)}
-                  onClick={() => goToCategory(category)}
+                  onClick={() => goToResult(result)}
                   className={`flex w-full items-center justify-between gap-3 px-4 py-2.5 text-left text-sm transition-colors ${
                     i === activeIndex ? "bg-blue-50 text-blue-700" : "text-slate-700 hover:bg-slate-50"
                   }`}
                 >
-                  <span className="truncate">{category.name}</span>
-                  <span className="shrink-0 text-xs text-slate-400">{category.slug}</span>
+                  <span className="truncate">{result.name}</span>
+                  <span className="shrink-0 text-xs text-slate-400">{result.meta}</span>
                 </button>
               </li>
             ))

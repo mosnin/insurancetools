@@ -6,7 +6,27 @@ import type { Tool, Category } from "@/types";
  * gets added here, which automatically wires it into search, the mega
  * menu, category pages, and the sitemap.
  */
-export const TOOLS: Tool[] = [];
+export const TOOLS: Tool[] = [
+  {
+    slug: "car-insurance-coverage-calculator",
+    name: "Car Insurance Coverage Calculator",
+    description:
+      "Find out how much auto liability coverage you need based on your assets and income, plus whether collision, gap, and umbrella coverage are worth adding.",
+    category: "Auto",
+    categorySlug: "auto",
+    keywords: [
+      "car insurance coverage calculator",
+      "how much car insurance do i need",
+      "auto insurance coverage calculator",
+      "liability coverage calculator",
+      "how much liability insurance do i need for my car",
+      "full coverage vs liability calculator",
+      "car insurance liability limits calculator",
+      "recommended car insurance coverage amounts",
+    ],
+    relatedTools: [],
+  },
+];
 
 export const CATEGORIES: Category[] = [
   {
