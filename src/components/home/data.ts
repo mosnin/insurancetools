@@ -18,7 +18,12 @@ export interface HomeCategoryMeta {
 }
 
 const FEATURED_SLUGS_BY_CATEGORY: Partial<Record<CategorySlug, string[]>> = {
-  auto: ["car-insurance-coverage-calculator"],
+  auto: [
+    "car-insurance-coverage-calculator",
+    "500-vs-1000-deductible-calculator",
+    "gap-insurance-calculator",
+    "total-loss-payout-calculator",
+  ],
 };
 
 export const CATEGORY_META: HomeCategoryMeta[] = CATEGORY_ORDER.map((slug) => ({
