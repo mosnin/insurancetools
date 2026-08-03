@@ -1165,6 +1165,140 @@ export const TOOLS: Tool[] = [
     ],
     relatedTools: ["renters-insurance-coverage-calculator", "renters-personal-property-value-calculator"],
   },
+  {
+    slug: "trip-cancellation-coverage-calculator",
+    name: "Trip Cancellation Insurance Calculator",
+    description:
+      "Compare a quoted trip cancellation insurance premium against your actual non-refundable trip cost, see what percentage it protects, and learn what standard coverage does and doesn't pay for.",
+    category: "Travel",
+    categorySlug: "travel",
+    keywords: [
+      "trip cancellation insurance calculator",
+      "is trip cancellation insurance worth it",
+      "trip cancellation coverage calculator",
+      "trip insurance cost vs trip cost",
+      "how much trip cancellation insurance do i need",
+      "nonrefundable trip cost insurance",
+    ],
+    relatedTools: ["travel-medical-insurance-calculator", "cruise-travel-insurance-value-calculator"],
+  },
+  {
+    slug: "travel-medical-insurance-calculator",
+    name: "Travel Medical Insurance Calculator",
+    description:
+      "Use this travel medical insurance calculator to estimate your worst-case medical exposure abroad and see how much protection a small premium actually buys.",
+    category: "Travel",
+    categorySlug: "travel",
+    keywords: [
+      "travel medical insurance calculator",
+      "do i need travel medical insurance",
+      "travel medical insurance cost calculator",
+      "does my health insurance cover me abroad",
+      "international medical coverage calculator",
+      "travel medical insurance vs domestic health insurance",
+    ],
+    relatedTools: ["medical-evacuation-coverage-calculator", "trip-cancellation-coverage-calculator"],
+  },
+  {
+    slug: "medical-evacuation-coverage-calculator",
+    name: "Medical Evacuation Insurance Calculator",
+    description:
+      "Use this medical evacuation insurance calculator to check your policy's evacuation sublimit against your trip's remoteness and get a clear action checklist.",
+    category: "Travel",
+    categorySlug: "travel",
+    keywords: [
+      "medical evacuation insurance calculator",
+      "do i need medical evacuation insurance",
+      "medical evacuation coverage cost",
+      "emergency medical evacuation insurance calculator",
+      "medevac insurance calculator",
+      "medical evacuation insurance for remote travel",
+    ],
+    relatedTools: ["travel-medical-insurance-calculator", "trip-cancellation-coverage-calculator"],
+  },
+  {
+    slug: "cruise-travel-insurance-value-calculator",
+    name: "Cruise Travel Insurance Calculator",
+    description:
+      "Use this cruise travel insurance calculator to check your non-refundable fare against missed port, cabin confinement, and itinerary change coverage first.",
+    category: "Travel",
+    categorySlug: "travel",
+    keywords: [
+      "cruise travel insurance calculator",
+      "is cruise insurance worth it",
+      "missed port insurance cruise",
+      "cabin confinement coverage cruise",
+      "cruise cancellation insurance cost",
+    ],
+    relatedTools: ["trip-cancellation-coverage-calculator", "travel-medical-insurance-calculator"],
+  },
+  {
+    slug: "pet-insurance-value-calculator",
+    name: "Pet Insurance Value Calculator",
+    description:
+      "Use this pet insurance value calculator to weigh your premium against a vet bill scenario you choose, applying real deductible and reimbursement math.",
+    category: "Pet",
+    categorySlug: "pet",
+    keywords: [
+      "pet insurance value calculator",
+      "is pet insurance worth it",
+      "pet insurance cost vs vet bills calculator",
+      "how much does pet insurance save",
+      "pet insurance breakeven calculator",
+    ],
+    relatedTools: ["accident-only-vs-comprehensive-pet-calculator", "pet-wellness-plan-value-calculator"],
+  },
+  {
+    slug: "accident-only-vs-comprehensive-pet-calculator",
+    name: "Accident-Only vs. Comprehensive Pet Insurance Calculator",
+    description:
+      "Compare accident-only vs. comprehensive pet insurance using your own quotes and vet bill to see exactly what each plan pays, including the illness coverage gap.",
+    category: "Pet",
+    categorySlug: "pet",
+    keywords: [
+      "accident only vs comprehensive pet insurance calculator",
+      "accident only pet insurance vs comprehensive",
+      "is accident only pet insurance enough",
+      "pet insurance plan comparison calculator",
+      "accident and illness pet insurance calculator",
+      "cheap pet insurance vs full coverage",
+    ],
+    relatedTools: ["pet-insurance-value-calculator", "pet-wellness-plan-value-calculator"],
+  },
+  {
+    slug: "pet-wellness-plan-value-calculator",
+    name: "Pet Wellness Plan Value Calculator",
+    description:
+      "Use this pet wellness plan value calculator to compare your plan's cost and reimbursement cap against your own routine vet care spending, so you can see the real annual math.",
+    category: "Pet",
+    categorySlug: "pet",
+    keywords: [
+      "pet wellness plan value calculator",
+      "is a pet wellness plan worth it",
+      "pet wellness plan vs paying out of pocket",
+      "wellness addon pet insurance calculator",
+      "routine vet care coverage calculator",
+      "pet preventive care plan value",
+    ],
+    relatedTools: ["pet-insurance-value-calculator", "accident-only-vs-comprehensive-pet-calculator"],
+  },
+  {
+    slug: "multi-pet-insurance-discount-calculator",
+    name: "Multi-Pet Insurance Discount Calculator",
+    description:
+      "This multi-pet insurance discount calculator turns your insurer's quoted percentage into real dollars, comparing bundled pricing against separate pet policies.",
+    category: "Pet",
+    categorySlug: "pet",
+    keywords: [
+      "multi pet insurance discount calculator",
+      "multi pet discount insurance calculator",
+      "how much do you save insuring multiple pets",
+      "multi pet insurance savings",
+      "bundling pet insurance policies",
+      "insure two pets discount calculator",
+    ],
+    relatedTools: ["pet-insurance-value-calculator", "accident-only-vs-comprehensive-pet-calculator"],
+  },
 ];
 
 export const CATEGORIES: Category[] = [

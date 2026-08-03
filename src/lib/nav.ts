@@ -270,9 +270,24 @@ export const NAV_ITEMS: NavItem[] = [
     categorySlugs: ["travel"],
     icon: Plane,
     categories: [
-      { name: "Travel Insurance", categorySlug: "travel", href: "/tools/travel", tools: [] },
+      {
+        name: "Travel Insurance",
+        categorySlug: "travel",
+        href: "/tools/travel",
+        tools: [
+          { name: "Trip Cancellation Insurance Calculator", href: "/tools/travel/trip-cancellation-coverage-calculator", slug: "trip-cancellation-coverage-calculator" },
+          { name: "Travel Medical Insurance Calculator", href: "/tools/travel/travel-medical-insurance-calculator", slug: "travel-medical-insurance-calculator" },
+          { name: "Medical Evacuation Insurance Calculator", href: "/tools/travel/medical-evacuation-coverage-calculator", slug: "medical-evacuation-coverage-calculator" },
+          { name: "Cruise Travel Insurance Calculator", href: "/tools/travel/cruise-travel-insurance-value-calculator", slug: "cruise-travel-insurance-value-calculator" },
+        ],
+      },
     ],
-    featured: [],
+    featured: [
+      { name: "Trip Cancellation Insurance Calculator", href: "/tools/travel/trip-cancellation-coverage-calculator", slug: "trip-cancellation-coverage-calculator" },
+      { name: "Travel Medical Insurance Calculator", href: "/tools/travel/travel-medical-insurance-calculator", slug: "travel-medical-insurance-calculator" },
+      { name: "Medical Evacuation Insurance Calculator", href: "/tools/travel/medical-evacuation-coverage-calculator", slug: "medical-evacuation-coverage-calculator" },
+      { name: "Cruise Travel Insurance Calculator", href: "/tools/travel/cruise-travel-insurance-value-calculator", slug: "cruise-travel-insurance-value-calculator" },
+    ],
   },
   {
     label: "Pet",
@@ -281,9 +296,24 @@ export const NAV_ITEMS: NavItem[] = [
     categorySlugs: ["pet"],
     icon: PawPrint,
     categories: [
-      { name: "Pet Insurance", categorySlug: "pet", href: "/tools/pet", tools: [] },
+      {
+        name: "Pet Insurance",
+        categorySlug: "pet",
+        href: "/tools/pet",
+        tools: [
+          { name: "Pet Insurance Value Calculator", href: "/tools/pet/pet-insurance-value-calculator", slug: "pet-insurance-value-calculator" },
+          { name: "Accident-Only vs. Comprehensive Pet Calculator", href: "/tools/pet/accident-only-vs-comprehensive-pet-calculator", slug: "accident-only-vs-comprehensive-pet-calculator" },
+          { name: "Pet Wellness Plan Value Calculator", href: "/tools/pet/pet-wellness-plan-value-calculator", slug: "pet-wellness-plan-value-calculator" },
+          { name: "Multi-Pet Insurance Discount Calculator", href: "/tools/pet/multi-pet-insurance-discount-calculator", slug: "multi-pet-insurance-discount-calculator" },
+        ],
+      },
     ],
-    featured: [],
+    featured: [
+      { name: "Pet Insurance Value Calculator", href: "/tools/pet/pet-insurance-value-calculator", slug: "pet-insurance-value-calculator" },
+      { name: "Accident-Only vs. Comprehensive Pet Calculator", href: "/tools/pet/accident-only-vs-comprehensive-pet-calculator", slug: "accident-only-vs-comprehensive-pet-calculator" },
+      { name: "Pet Wellness Plan Value Calculator", href: "/tools/pet/pet-wellness-plan-value-calculator", slug: "pet-wellness-plan-value-calculator" },
+      { name: "Multi-Pet Insurance Discount Calculator", href: "/tools/pet/multi-pet-insurance-discount-calculator", slug: "multi-pet-insurance-discount-calculator" },
+    ],
   },
   {
     label: "Claims",

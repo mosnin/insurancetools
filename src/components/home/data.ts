@@ -54,6 +54,18 @@ const FEATURED_SLUGS_BY_CATEGORY: Partial<Record<CategorySlug, string[]>> = {
     "renters-liability-coverage-calculator",
     "roommate-renters-insurance-split-calculator",
   ],
+  travel: [
+    "trip-cancellation-coverage-calculator",
+    "travel-medical-insurance-calculator",
+    "medical-evacuation-coverage-calculator",
+    "cruise-travel-insurance-value-calculator",
+  ],
+  pet: [
+    "pet-insurance-value-calculator",
+    "accident-only-vs-comprehensive-pet-calculator",
+    "pet-wellness-plan-value-calculator",
+    "multi-pet-insurance-discount-calculator",
+  ],
 };
 
 export const CATEGORY_META: HomeCategoryMeta[] = CATEGORY_ORDER.map((slug) => ({
