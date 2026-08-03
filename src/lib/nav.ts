@@ -243,9 +243,25 @@ export const NAV_ITEMS: NavItem[] = [
     categorySlugs: ["renters"],
     icon: Building2,
     categories: [
-      { name: "Renters Insurance", categorySlug: "renters", href: "/tools/renters", tools: [] },
+      {
+        name: "Renters Insurance",
+        categorySlug: "renters",
+        href: "/tools/renters",
+        tools: [
+          { name: "Renters Insurance Coverage Calculator", href: "/tools/renters/renters-insurance-coverage-calculator", slug: "renters-insurance-coverage-calculator" },
+          { name: "Renters Personal Property Value Calculator", href: "/tools/renters/renters-personal-property-value-calculator", slug: "renters-personal-property-value-calculator" },
+          { name: "Renters Liability Coverage Calculator", href: "/tools/renters/renters-liability-coverage-calculator", slug: "renters-liability-coverage-calculator" },
+          { name: "Additional Living Expenses Calculator for Renters", href: "/tools/renters/additional-living-expenses-renters-calculator", slug: "additional-living-expenses-renters-calculator" },
+          { name: "Roommate Renters Insurance Split Calculator", href: "/tools/renters/roommate-renters-insurance-split-calculator", slug: "roommate-renters-insurance-split-calculator" },
+        ],
+      },
     ],
-    featured: [],
+    featured: [
+      { name: "Renters Insurance Coverage Calculator", href: "/tools/renters/renters-insurance-coverage-calculator", slug: "renters-insurance-coverage-calculator" },
+      { name: "Renters Personal Property Value Calculator", href: "/tools/renters/renters-personal-property-value-calculator", slug: "renters-personal-property-value-calculator" },
+      { name: "Renters Liability Coverage Calculator", href: "/tools/renters/renters-liability-coverage-calculator", slug: "renters-liability-coverage-calculator" },
+      { name: "Roommate Renters Insurance Split Calculator", href: "/tools/renters/roommate-renters-insurance-split-calculator", slug: "roommate-renters-insurance-split-calculator" },
+    ],
   },
   {
     label: "Travel",

@@ -1080,6 +1080,91 @@ export const TOOLS: Tool[] = [
     ],
     relatedTools: ["general-liability-coverage-calculator", "car-insurance-coverage-calculator"],
   },
+  {
+    slug: "renters-insurance-coverage-calculator",
+    name: "Renters Insurance Coverage Calculator",
+    description:
+      "Use this renters insurance coverage calculator to get a starting personal property range, an ALE estimate, and a place to sanity-check the liability limit and deductible you're considering.",
+    category: "Renters",
+    categorySlug: "renters",
+    keywords: [
+      "renters insurance coverage calculator",
+      "how much renters insurance do i need",
+      "renters insurance calculator",
+      "renters insurance coverage amount",
+      "personal property and liability calculator for renters",
+      "renters insurance needs",
+    ],
+    relatedTools: ["renters-personal-property-value-calculator", "renters-liability-coverage-calculator"],
+  },
+  {
+    slug: "renters-personal-property-value-calculator",
+    name: "Renters Personal Property Value Calculator",
+    description:
+      "Use this renters personal property value calculator to itemize your belongings room by room and find the right personal property limit for your policy.",
+    category: "Renters",
+    categorySlug: "renters",
+    keywords: [
+      "renters personal property value calculator",
+      "renters inventory calculator",
+      "how much are my belongings worth renter",
+      "personal property value for renters insurance",
+      "renters contents inventory tool",
+      "apartment belongings value calculator",
+    ],
+    relatedTools: ["renters-insurance-coverage-calculator", "roommate-renters-insurance-split-calculator"],
+  },
+  {
+    slug: "renters-liability-coverage-calculator",
+    name: "Renters Liability Coverage Calculator",
+    description:
+      "This renters liability coverage calculator sizes your liability limit to your assets and risks like guests, a dog, or subletting. Free, instant, no sign-up.",
+    category: "Renters",
+    categorySlug: "renters",
+    keywords: [
+      "renters liability coverage calculator",
+      "how much liability coverage do renters need",
+      "renters insurance liability limit calculator",
+      "guest injury renters insurance",
+      "dog bite renters insurance calculator",
+      "personal liability coverage for tenants",
+    ],
+    relatedTools: ["renters-insurance-coverage-calculator", "umbrella-policy-need-calculator"],
+  },
+  {
+    slug: "additional-living-expenses-renters-calculator",
+    name: "Additional Living Expenses Calculator for Renters",
+    description:
+      "Use this additional living expenses calculator for renters to estimate loss-of-use costs, plus whether your lease still requires rent while you're displaced.",
+    category: "Renters",
+    categorySlug: "renters",
+    keywords: [
+      "additional living expenses calculator for renters",
+      "renters insurance loss of use coverage",
+      "ALE coverage for renters",
+      "temporary housing coverage renters insurance",
+      "renters insurance displacement calculator",
+      "how much ALE coverage do renters need",
+    ],
+    relatedTools: ["renters-insurance-coverage-calculator", "additional-living-expenses-calculator"],
+  },
+  {
+    slug: "roommate-renters-insurance-split-calculator",
+    name: "Roommate Renters Insurance Split Calculator",
+    description:
+      "Run the numbers with this roommate renters insurance split calculator: compare one shared policy against separate policies and see the real annual cost gap.",
+    category: "Renters",
+    categorySlug: "renters",
+    keywords: [
+      "roommate renters insurance split calculator",
+      "should roommates get one renters insurance policy or separate",
+      "splitting renters insurance cost with roommates",
+      "roommate insurance calculator",
+      "shared apartment renters insurance",
+      "one policy vs multiple renters insurance policies",
+    ],
+    relatedTools: ["renters-insurance-coverage-calculator", "renters-personal-property-value-calculator"],
+  },
 ];
 
 export const CATEGORIES: Category[] = [

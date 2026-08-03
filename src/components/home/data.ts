@@ -48,6 +48,12 @@ const FEATURED_SLUGS_BY_CATEGORY: Partial<Record<CategorySlug, string[]>> = {
     "cyber-insurance-coverage-calculator",
     "workers-compensation-cost-estimator",
   ],
+  renters: [
+    "renters-insurance-coverage-calculator",
+    "renters-personal-property-value-calculator",
+    "renters-liability-coverage-calculator",
+    "roommate-renters-insurance-split-calculator",
+  ],
 };
 
 export const CATEGORY_META: HomeCategoryMeta[] = CATEGORY_ORDER.map((slug) => ({
