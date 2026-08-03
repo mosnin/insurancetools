@@ -139,9 +139,31 @@ export const NAV_ITEMS: NavItem[] = [
     categorySlugs: ["life"],
     icon: HeartPulse,
     categories: [
-      { name: "Life Insurance", categorySlug: "life", href: "/tools/life", tools: [] },
+      {
+        name: "Life Insurance",
+        categorySlug: "life",
+        href: "/tools/life",
+        tools: [
+          { name: "Life Insurance Needs Calculator", href: "/tools/life/life-insurance-needs-calculator", slug: "life-insurance-needs-calculator" },
+          { name: "DIME Method Life Insurance Calculator", href: "/tools/life/dime-method-calculator", slug: "dime-method-calculator" },
+          { name: "Income Replacement Calculator", href: "/tools/life/income-replacement-calculator", slug: "income-replacement-calculator" },
+          { name: "Term Life Insurance Length Calculator", href: "/tools/life/term-length-calculator", slug: "term-length-calculator" },
+          { name: "Funeral & Final Expense Calculator", href: "/tools/life/funeral-final-expense-calculator", slug: "funeral-final-expense-calculator" },
+          { name: "Mortgage Protection Insurance Calculator", href: "/tools/life/mortgage-protection-calculator", slug: "mortgage-protection-calculator" },
+          { name: "Term vs. Whole Life Insurance Cost Calculator", href: "/tools/life/term-vs-whole-life-cost-calculator", slug: "term-vs-whole-life-cost-calculator" },
+          { name: "Stay-at-Home Parent Life Insurance Calculator", href: "/tools/life/stay-at-home-parent-coverage-calculator", slug: "stay-at-home-parent-coverage-calculator" },
+          { name: "Business Owner Life Insurance Calculator", href: "/tools/life/business-owner-life-insurance-calculator", slug: "business-owner-life-insurance-calculator" },
+          { name: "Life Insurance Affordability Calculator", href: "/tools/life/life-insurance-affordability-calculator", slug: "life-insurance-affordability-calculator" },
+        ],
+      },
     ],
-    featured: [],
+    featured: [
+      { name: "Life Insurance Needs Calculator", href: "/tools/life/life-insurance-needs-calculator", slug: "life-insurance-needs-calculator" },
+      { name: "DIME Method Life Insurance Calculator", href: "/tools/life/dime-method-calculator", slug: "dime-method-calculator" },
+      { name: "Income Replacement Calculator", href: "/tools/life/income-replacement-calculator", slug: "income-replacement-calculator" },
+      { name: "Term Life Insurance Length Calculator", href: "/tools/life/term-length-calculator", slug: "term-length-calculator" },
+      { name: "Term vs. Whole Life Insurance Cost Calculator", href: "/tools/life/term-vs-whole-life-cost-calculator", slug: "term-vs-whole-life-cost-calculator" },
+    ],
   },
   {
     label: "Health",
