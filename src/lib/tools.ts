@@ -294,6 +294,199 @@ export const TOOLS: Tool[] = [
     ],
     relatedTools: ["gap-insurance-calculator", "liability-only-vs-full-coverage-calculator"],
   },
+  {
+    slug: "home-replacement-cost-calculator",
+    name: "Home Replacement Cost Calculator",
+    description:
+      "Estimate your home's rebuild cost from your own square footage and a local construction cost per square foot you research yourself, plus an optional feature adjustment for upgrades or extra structures.",
+    category: "Home",
+    categorySlug: "home",
+    keywords: [
+      "home replacement cost calculator",
+      "how to calculate home replacement cost",
+      "dwelling replacement cost calculator",
+      "rebuild cost calculator",
+      "home insurance replacement cost estimator",
+      "replacement cost vs market value",
+    ],
+    relatedTools: ["dwelling-coverage-calculator", "home-insurance-underinsurance-calculator"],
+  },
+  {
+    slug: "dwelling-coverage-calculator",
+    name: "Dwelling Coverage Calculator",
+    description:
+      "Turn your home rebuild cost into a recommended Coverage A dwelling limit, with an optional inflation buffer and a detached structures value you control.",
+    category: "Home",
+    categorySlug: "home",
+    keywords: [
+      "dwelling coverage calculator",
+      "how much dwelling coverage do i need",
+      "coverage A calculator",
+      "home insurance dwelling limit calculator",
+      "dwelling coverage estimate",
+    ],
+    relatedTools: ["home-replacement-cost-calculator", "home-insurance-underinsurance-calculator"],
+  },
+  {
+    slug: "personal-property-coverage-calculator",
+    name: "Personal Property Coverage Calculator",
+    description:
+      "Add up what your belongings would cost to replace by category, then see how that total compares to the illustrative default personal property limit many homeowners policies set.",
+    category: "Home",
+    categorySlug: "home",
+    keywords: [
+      "personal property coverage calculator",
+      "how much personal property coverage do i need",
+      "home contents coverage calculator",
+      "personal property insurance estimate",
+      "homeowners contents value calculator",
+    ],
+    relatedTools: ["home-inventory-value-calculator", "scheduled-jewelry-coverage-calculator"],
+  },
+  {
+    slug: "home-insurance-deductible-calculator",
+    name: "Home Insurance Deductible Calculator",
+    description:
+      "Compare your homeowners premium at two deductible levels, find the exact break-even point in years, and weigh it against how often you actually file claims.",
+    category: "Home",
+    categorySlug: "home",
+    keywords: [
+      "home insurance deductible calculator",
+      "homeowners deductible comparison",
+      "which home insurance deductible should i choose",
+      "home insurance deductible break even calculator",
+      "raise home deductible savings",
+    ],
+    relatedTools: ["dwelling-coverage-calculator", "water-damage-claim-calculator"],
+  },
+  {
+    slug: "roof-replacement-claim-calculator",
+    name: "Roof Replacement Claim Calculator",
+    description:
+      "Calculate your roof replacement claim payout: enter RCV, roof age, insurer useful-life, and deductible to see your ACV payout plus any recoverable depreciation.",
+    category: "Home",
+    categorySlug: "home",
+    keywords: [
+      "roof replacement claim calculator",
+      "roof claim payout calculator",
+      "roof depreciation calculator",
+      "actual cash value roof claim",
+      "recoverable depreciation roof",
+    ],
+    relatedTools: ["water-damage-claim-calculator", "home-insurance-deductible-calculator"],
+  },
+  {
+    slug: "water-damage-claim-calculator",
+    name: "Water Damage Claim Calculator",
+    description:
+      "Estimate your water damage insurance claim payout from repair cost, deductible, and any policy sublimit, with guidance on sudden vs. gradual vs. flood damage.",
+    category: "Home",
+    categorySlug: "home",
+    keywords: [
+      "water damage claim calculator",
+      "water damage insurance payout calculator",
+      "water damage claim estimate",
+      "sudden water damage coverage calculator",
+      "water damage deductible calculator",
+    ],
+    relatedTools: ["roof-replacement-claim-calculator", "flood-insurance-need-calculator"],
+  },
+  {
+    slug: "additional-living-expenses-calculator",
+    name: "Additional Living Expenses Calculator",
+    description:
+      "Free ALE calculator that estimates additional living expenses from your local hotel rate, displacement length, and extra daily costs, then compares the total against your current loss of use limit.",
+    category: "Home",
+    categorySlug: "home",
+    keywords: [
+      "additional living expenses calculator",
+      "ALE coverage calculator",
+      "loss of use coverage calculator",
+      "temporary housing insurance calculator",
+      "how much ALE coverage do i need",
+    ],
+    relatedTools: ["water-damage-claim-calculator", "roof-replacement-claim-calculator"],
+  },
+  {
+    slug: "home-inventory-value-calculator",
+    name: "Home Inventory Value Calculator",
+    description:
+      "Build an itemized home inventory value calculator: add each belonging with a quantity and value, and watch your total update live for insurance and claims records.",
+    category: "Home",
+    categorySlug: "home",
+    keywords: [
+      "home inventory value calculator",
+      "home inventory calculator",
+      "household inventory value estimator",
+      "home contents inventory tool",
+      "how to make a home inventory",
+    ],
+    relatedTools: ["personal-property-coverage-calculator", "scheduled-jewelry-coverage-calculator"],
+  },
+  {
+    slug: "flood-insurance-need-calculator",
+    name: "Flood Insurance Need Calculator",
+    description:
+      "Totals your uninsured flood exposure from dwelling and personal property value, since homeowners insurance excludes flood damage, and compares it to an optional premium quote.",
+    category: "Home",
+    categorySlug: "home",
+    keywords: [
+      "flood insurance need calculator",
+      "do i need flood insurance",
+      "flood insurance exposure calculator",
+      "is my home at risk of flood",
+      "flood insurance value calculator",
+    ],
+    relatedTools: ["home-replacement-cost-calculator", "water-damage-claim-calculator"],
+  },
+  {
+    slug: "ordinance-and-law-coverage-calculator",
+    name: "Ordinance and Law Coverage Calculator",
+    description:
+      "Enter your own contractor-estimated code-upgrade cost and current ordinance & law limit to see if your homeowners policy has a rebuild-to-code coverage gap.",
+    category: "Home",
+    categorySlug: "home",
+    keywords: [
+      "ordinance and law coverage calculator",
+      "ordinance or law coverage calculator",
+      "building code upgrade coverage",
+      "ordinance and law insurance need",
+      "code upgrade cost home insurance",
+    ],
+    relatedTools: ["dwelling-coverage-calculator", "home-insurance-underinsurance-calculator"],
+  },
+  {
+    slug: "home-insurance-underinsurance-calculator",
+    name: "Home Insurance Underinsurance Calculator",
+    description:
+      "Check your existing home insurance dwelling limit against your replacement cost to see the coverage gap in dollars and percent, plus whether a coinsurance penalty could apply.",
+    category: "Home",
+    categorySlug: "home",
+    keywords: [
+      "home insurance underinsurance calculator",
+      "am i underinsured on my home",
+      "home insurance coverage gap calculator",
+      "underinsured homeowners calculator",
+      "dwelling coverage shortfall calculator",
+    ],
+    relatedTools: ["home-replacement-cost-calculator", "dwelling-coverage-calculator"],
+  },
+  {
+    slug: "scheduled-jewelry-coverage-calculator",
+    name: "Scheduled Jewelry Coverage Calculator",
+    description:
+      "Find out how much of your jewelry, watches, and heirlooms exceeds your policy's theft sublimit and would need a scheduled floater to be fully covered.",
+    category: "Home",
+    categorySlug: "home",
+    keywords: [
+      "scheduled jewelry coverage calculator",
+      "do i need a jewelry floater",
+      "jewelry insurance rider calculator",
+      "scheduled personal property jewelry",
+      "jewelry insurance sublimit calculator",
+    ],
+    relatedTools: ["personal-property-coverage-calculator", "home-inventory-value-calculator"],
+  },
 ];
 
 export const CATEGORIES: Category[] = [

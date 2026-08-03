@@ -24,6 +24,12 @@ const FEATURED_SLUGS_BY_CATEGORY: Partial<Record<CategorySlug, string[]>> = {
     "gap-insurance-calculator",
     "total-loss-payout-calculator",
   ],
+  home: [
+    "home-replacement-cost-calculator",
+    "dwelling-coverage-calculator",
+    "water-damage-claim-calculator",
+    "home-insurance-underinsurance-calculator",
+  ],
 };
 
 export const CATEGORY_META: HomeCategoryMeta[] = CATEGORY_ORDER.map((slug) => ({
