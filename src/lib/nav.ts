@@ -356,9 +356,26 @@ export const NAV_ITEMS: NavItem[] = [
     categorySlugs: ["deductibles"],
     icon: Wallet,
     categories: [
-      { name: "Deductible Comparisons", categorySlug: "deductibles", href: "/tools/deductibles", tools: [] },
+      {
+        name: "Deductible Comparisons",
+        categorySlug: "deductibles",
+        href: "/tools/deductibles",
+        tools: [
+          { name: "Deductible Comparison Calculator", href: "/tools/deductibles/deductible-comparison-calculator", slug: "deductible-comparison-calculator" },
+          { name: "Per-Occurrence vs. Aggregate Deductible Calculator", href: "/tools/deductibles/per-occurrence-vs-annual-aggregate-deductible-calculator", slug: "per-occurrence-vs-annual-aggregate-deductible-calculator" },
+          { name: "Percentage Deductible Calculator", href: "/tools/deductibles/percentage-deductible-calculator", slug: "percentage-deductible-calculator" },
+          { name: "Deductible Savings Calculator", href: "/tools/deductibles/deductible-savings-calculator", slug: "deductible-savings-calculator" },
+          { name: "Multi-Policy Deductible Stacking Calculator", href: "/tools/deductibles/multi-policy-deductible-stacking-calculator", slug: "multi-policy-deductible-stacking-calculator" },
+          { name: "Deductible Affordability Calculator", href: "/tools/deductibles/deductible-affordability-calculator", slug: "deductible-affordability-calculator" },
+        ],
+      },
     ],
-    featured: [],
+    featured: [
+      { name: "Deductible Comparison Calculator", href: "/tools/deductibles/deductible-comparison-calculator", slug: "deductible-comparison-calculator" },
+      { name: "Deductible Savings Calculator", href: "/tools/deductibles/deductible-savings-calculator", slug: "deductible-savings-calculator" },
+      { name: "Percentage Deductible Calculator", href: "/tools/deductibles/percentage-deductible-calculator", slug: "percentage-deductible-calculator" },
+      { name: "Deductible Affordability Calculator", href: "/tools/deductibles/deductible-affordability-calculator", slug: "deductible-affordability-calculator" },
+    ],
   },
   {
     label: "Coverage",
@@ -367,9 +384,25 @@ export const NAV_ITEMS: NavItem[] = [
     categorySlugs: ["coverage"],
     icon: ShieldCheck,
     categories: [
-      { name: "Coverage Needs", categorySlug: "coverage", href: "/tools/coverage", tools: [] },
+      {
+        name: "Coverage Needs",
+        categorySlug: "coverage",
+        href: "/tools/coverage",
+        tools: [
+          { name: "How Much Coverage Do I Need? Calculator", href: "/tools/coverage/how-much-insurance-coverage-do-i-need-calculator", slug: "how-much-insurance-coverage-do-i-need-calculator" },
+          { name: "Coverage Gap Calculator", href: "/tools/coverage/coverage-gap-calculator", slug: "coverage-gap-calculator" },
+          { name: "Policy Upgrade Value Calculator", href: "/tools/coverage/policy-upgrade-value-calculator", slug: "policy-upgrade-value-calculator" },
+          { name: "Umbrella Policy Need Calculator", href: "/tools/coverage/umbrella-policy-need-calculator", slug: "umbrella-policy-need-calculator" },
+          { name: "Net Worth Protection Calculator", href: "/tools/coverage/net-worth-protection-calculator", slug: "net-worth-protection-calculator" },
+        ],
+      },
     ],
-    featured: [],
+    featured: [
+      { name: "How Much Coverage Do I Need? Calculator", href: "/tools/coverage/how-much-insurance-coverage-do-i-need-calculator", slug: "how-much-insurance-coverage-do-i-need-calculator" },
+      { name: "Coverage Gap Calculator", href: "/tools/coverage/coverage-gap-calculator", slug: "coverage-gap-calculator" },
+      { name: "Umbrella Policy Need Calculator", href: "/tools/coverage/umbrella-policy-need-calculator", slug: "umbrella-policy-need-calculator" },
+      { name: "Net Worth Protection Calculator", href: "/tools/coverage/net-worth-protection-calculator", slug: "net-worth-protection-calculator" },
+    ],
   },
   {
     label: "State Requirements",

@@ -72,6 +72,18 @@ const FEATURED_SLUGS_BY_CATEGORY: Partial<Record<CategorySlug, string[]>> = {
     "claim-underpayment-calculator",
     "settlement-negotiation-target-calculator",
   ],
+  deductibles: [
+    "deductible-comparison-calculator",
+    "deductible-savings-calculator",
+    "percentage-deductible-calculator",
+    "deductible-affordability-calculator",
+  ],
+  coverage: [
+    "how-much-insurance-coverage-do-i-need-calculator",
+    "coverage-gap-calculator",
+    "umbrella-policy-need-calculator",
+    "net-worth-protection-calculator",
+  ],
 };
 
 export const CATEGORY_META: HomeCategoryMeta[] = CATEGORY_ORDER.map((slug) => ({
