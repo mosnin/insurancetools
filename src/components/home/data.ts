@@ -66,6 +66,12 @@ const FEATURED_SLUGS_BY_CATEGORY: Partial<Record<CategorySlug, string[]>> = {
     "pet-wellness-plan-value-calculator",
     "multi-pet-insurance-discount-calculator",
   ],
+  claims: [
+    "insurance-claim-payout-calculator",
+    "deductible-claim-calculator",
+    "claim-underpayment-calculator",
+    "settlement-negotiation-target-calculator",
+  ],
 };
 
 export const CATEGORY_META: HomeCategoryMeta[] = CATEGORY_ORDER.map((slug) => ({
