@@ -36,6 +36,12 @@ const FEATURED_SLUGS_BY_CATEGORY: Partial<Record<CategorySlug, string[]>> = {
     "income-replacement-calculator",
     "term-length-calculator",
   ],
+  health: [
+    "break-even-medical-spending-calculator",
+    "health-plan-comparison-calculator",
+    "hsa-savings-calculator",
+    "ppo-vs-hdhp-calculator",
+  ],
 };
 
 export const CATEGORY_META: HomeCategoryMeta[] = CATEGORY_ORDER.map((slug) => ({
