@@ -42,6 +42,12 @@ const FEATURED_SLUGS_BY_CATEGORY: Partial<Record<CategorySlug, string[]>> = {
     "hsa-savings-calculator",
     "ppo-vs-hdhp-calculator",
   ],
+  business: [
+    "general-liability-coverage-calculator",
+    "professional-liability-errors-omissions-calculator",
+    "cyber-insurance-coverage-calculator",
+    "workers-compensation-cost-estimator",
+  ],
 };
 
 export const CATEGORY_META: HomeCategoryMeta[] = CATEGORY_ORDER.map((slug) => ({
