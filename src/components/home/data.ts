@@ -84,6 +84,11 @@ const FEATURED_SLUGS_BY_CATEGORY: Partial<Record<CategorySlug, string[]>> = {
     "umbrella-policy-need-calculator",
     "net-worth-protection-calculator",
   ],
+  "state-requirements": [
+    "state-minimum-vs-recommended-coverage-gap-calculator",
+    "no-fault-vs-at-fault-state-cost-impact-calculator",
+    "multi-state-move-insurance-checklist-calculator",
+  ],
 };
 
 export const CATEGORY_META: HomeCategoryMeta[] = CATEGORY_ORDER.map((slug) => ({

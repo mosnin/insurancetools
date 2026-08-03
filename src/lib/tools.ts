@@ -1673,6 +1673,57 @@ export const TOOLS: Tool[] = [
     ],
     relatedTools: ["umbrella-policy-need-calculator", "how-much-insurance-coverage-do-i-need-calculator"],
   },
+  {
+    slug: "state-minimum-vs-recommended-coverage-gap-calculator",
+    name: "State Minimum vs. Recommended Coverage Gap Calculator",
+    description:
+      "Use this state minimum vs recommended coverage calculator to enter your own state's liability limits and see the exact dollar gap against a recommended limit.",
+    category: "State Requirements",
+    categorySlug: "state-requirements",
+    keywords: [
+      "state minimum vs recommended coverage calculator",
+      "is state minimum car insurance enough",
+      "state minimum vs full coverage gap",
+      "how much more coverage than state minimum do i need",
+      "state minimum liability insurance calculator",
+      "why state minimum insurance isn't enough",
+    ],
+    relatedTools: ["car-insurance-coverage-calculator", "umbrella-policy-need-calculator"],
+  },
+  {
+    slug: "no-fault-vs-at-fault-state-cost-impact-calculator",
+    name: "No-Fault vs. At-Fault State Insurance Calculator",
+    description:
+      "Use this no fault vs at fault state insurance calculator to check your PIP or liability limit against a medical bill estimate and confirm your state's system.",
+    category: "State Requirements",
+    categorySlug: "state-requirements",
+    keywords: [
+      "no fault vs at fault state insurance calculator",
+      "what is a no fault insurance state",
+      "no fault state PIP calculator",
+      "is my state no fault or at fault",
+      "PIP coverage no fault state",
+      "no fault vs tort state insurance",
+    ],
+    relatedTools: ["state-minimum-vs-recommended-coverage-gap-calculator", "car-insurance-coverage-calculator"],
+  },
+  {
+    slug: "multi-state-move-insurance-checklist-calculator",
+    name: "Multi-State Move Insurance Checklist Calculator",
+    description:
+      "Use this moving to another state insurance checklist calculator to time your auto, home, and health insurance tasks and size your valuables-in-transit risk.",
+    category: "State Requirements",
+    categorySlug: "state-requirements",
+    keywords: [
+      "moving to another state insurance checklist",
+      "does car insurance transfer to another state",
+      "insurance checklist for moving states",
+      "do i need new insurance if i move to another state",
+      "moving to a new state insurance requirements",
+      "interstate move insurance value at risk",
+    ],
+    relatedTools: ["renters-personal-property-value-calculator", "home-inventory-value-calculator"],
+  },
 ];
 
 export const CATEGORIES: Category[] = [

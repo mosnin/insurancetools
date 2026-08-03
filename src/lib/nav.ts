@@ -411,9 +411,22 @@ export const NAV_ITEMS: NavItem[] = [
     categorySlugs: ["state-requirements"],
     icon: MapPin,
     categories: [
-      { name: "State Requirements", categorySlug: "state-requirements", href: "/tools/state-requirements", tools: [] },
+      {
+        name: "State Requirements",
+        categorySlug: "state-requirements",
+        href: "/tools/state-requirements",
+        tools: [
+          { name: "State Minimum vs. Recommended Coverage Calculator", href: "/tools/state-requirements/state-minimum-vs-recommended-coverage-gap-calculator", slug: "state-minimum-vs-recommended-coverage-gap-calculator" },
+          { name: "No-Fault vs. At-Fault State Calculator", href: "/tools/state-requirements/no-fault-vs-at-fault-state-cost-impact-calculator", slug: "no-fault-vs-at-fault-state-cost-impact-calculator" },
+          { name: "Multi-State Move Insurance Checklist", href: "/tools/state-requirements/multi-state-move-insurance-checklist-calculator", slug: "multi-state-move-insurance-checklist-calculator" },
+        ],
+      },
     ],
-    featured: [],
+    featured: [
+      { name: "State Minimum vs. Recommended Coverage Calculator", href: "/tools/state-requirements/state-minimum-vs-recommended-coverage-gap-calculator", slug: "state-minimum-vs-recommended-coverage-gap-calculator" },
+      { name: "No-Fault vs. At-Fault State Calculator", href: "/tools/state-requirements/no-fault-vs-at-fault-state-cost-impact-calculator", slug: "no-fault-vs-at-fault-state-cost-impact-calculator" },
+      { name: "Multi-State Move Insurance Checklist", href: "/tools/state-requirements/multi-state-move-insurance-checklist-calculator", slug: "multi-state-move-insurance-checklist-calculator" },
+    ],
   },
 ];
 
